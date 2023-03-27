@@ -27,3 +27,5 @@ Inventory_System/obj/Debug/net7.0/Inventory_System.GlobalUsings.g.cs
 Inventory_System/obj/Debug/net7.0/Inventory_System.pdb
 Inventory_System/obj/Debug/net7.0/ref/Inventory_System.dll
 Inventory_System/obj/Debug/net7.0/refint/Inventory_System.dll
+.trunk/trunk.yaml
+.trunk/configs/.yamllint.yaml
