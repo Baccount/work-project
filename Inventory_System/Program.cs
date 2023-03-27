@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Globalization;
+﻿using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
-using CsvHelper.Configuration;
-//using System.Linq;
+
 
 public class Book
 {
-    public string Title { get; set; }
-    public string Author { get; set; }
-    public string ISBN { get; set; }
+    public string? Title { get; set; }
+    public string? Author { get; set; }
+    public string? ISBN { get; set; }
     public DateTime PublicationDate { get; set; }
     public int NumberOfCopies { get; set; }
     public bool IsBorrowed { get; set; }
@@ -360,11 +356,13 @@ public class BookInventory
         }
     }
     // DONE!
-    public Book SearchBook(string title = null, string author = null, string isbn = null)
+    public Book? SearchBook(string? title = null, string? author = null, string? isbn = null)
     {
         books = ReadFromCSV();
-        // search for a book by title, author, or ISBN
-        Book book = books.Find(b => b.Title == title || b.Author == author || b.ISBN == isbn);
+        // Search for a book by title, author, or ISBN
+        Book book = books.FirstOrDefault(b => (title == null || b.Title == title) &&
+                                        (author == null || b.Author == author) &&
+                                        (isbn == null || b.ISBN == isbn));
         if (book == null)
         {
             return null;
