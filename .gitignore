@@ -29,3 +29,4 @@ Inventory_System/obj/Debug/net7.0/ref/Inventory_System.dll
 Inventory_System/obj/Debug/net7.0/refint/Inventory_System.dll
 .trunk/trunk.yaml
 .trunk/configs/.yamllint.yaml
+Inventory_System/inventory.csv
