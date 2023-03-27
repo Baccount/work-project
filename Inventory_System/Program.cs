@@ -110,42 +110,10 @@ public class Program
 
     private static void UpdateBook()
     {
+        // Run the UpdateBookDetails method
         Console.Write("Enter book ISBN or title to update: ");
         string identifier = Console.ReadLine();
-
-        //Book book = inventory.SearchBook(identifier);
-        // if (book != null)
-        // {
-        //     Console.WriteLine("1. Update number of copies");
-        //     Console.WriteLine("2. Update loan status");
-        //     Console.Write("Enter your choice: ");
-        //     int choice = int.Parse(Console.ReadLine());
-
-        //     if (choice == 1)
-        //     {
-        //         Console.Write("Enter new number of copies: ");
-        //         int numberOfCopies = int.Parse(Console.ReadLine());
-        //         //book.NumberOfCopies = numberOfCopies;
-        //     }
-        //     else if (choice == 2)
-        //     {
-        //         Console.Write("Enter new loan status (true for borrowed, false for available): ");
-        //         bool loanStatus = bool.Parse(Console.ReadLine());
-        //         //book.IsBorrowed = loanStatus;
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("Invalid choice. Update canceled.");
-        //         return;
-        //     }
-
-        //     inventory.UpdateBookDetails(identifier, book);
-        //     Console.WriteLine("Book updated successfully.");
-        // }
-        // else
-        // {
-        //     Console.WriteLine("Book not found.");
-        // }
+        inventory.UpdateBookDetails(identifier);
     }
 private static void SearchBook()
     {
@@ -317,15 +285,45 @@ public class BookInventory
 
     }
     // TODO in progress
-    public void UpdateBookDetails(string identifier, Book book)
+    public void UpdateBookDetails(string identifier)
     {
-        //The program should allow the user to update the book details, such as the number of copies or the loan status,
-        //by entering the book's ISBN or title.
-        // find 
+        // find the book to update
+        Book book = books.Find(b => b.ISBN == identifier);
+        if (book == null)
+        {
+            Console.WriteLine("Book not found.");
+            return;
+        }
+        // if book is found, update the book details and write to CSV file
+        Console.Write("1. Enter number of copies: ");
+        Console.WriteLine();
+        Console.Write("2. Is the book Borrowed?: ");
+        Console.WriteLine();
+        int option = int.Parse(Console.ReadLine());
+        if (option == 1)
+        {
+            Console.Write("Enter number of copies: ");
+            int numberOfCopies = int.Parse(Console.ReadLine());
+            book.NumberOfCopies = numberOfCopies;
+            WriteToCSV();
+        }
+        else if (option == 2)
+        {
+            try{
+                Console.Write("Is the book Borrowed?: ");
+                bool isBorrowed = bool.Parse(Console.ReadLine());
+                book.IsBorrowed = isBorrowed;
+                WriteToCSV();
+            }
+            catch(Exception e){
+                Console.WriteLine(e.Message);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid option.");
+        }
     }
-
-
-
 }
 
 
