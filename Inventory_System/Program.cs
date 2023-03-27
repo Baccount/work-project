@@ -118,6 +118,7 @@ public class Program
     // TODO 1: Implement the SearchBook method
 private static void SearchBook()
     {
+        
         Console.WriteLine("Search by:");
         Console.WriteLine("1. Title");
         Console.WriteLine("2. Author");
@@ -127,7 +128,7 @@ private static void SearchBook()
         Console.WriteLine("Enter search term:");
         string searchTerm = Console.ReadLine();
         Console.WriteLine();
-        Book foundBook = null;
+        Book? foundBook = null;
 
         switch (option)
         {
@@ -277,6 +278,8 @@ public class BookInventory
     // DONE!
     public void AddBook(Book book)
     {
+        // read the CSV file
+        books = ReadFromCSV();
         // write the book to the CSV file
         books.Add(book);
         WriteToCSV();
@@ -285,6 +288,8 @@ public class BookInventory
     // DONE!
     public void RemoveBook(string identifier)
     {
+        // read the CSV file
+        books = ReadFromCSV();
         // remove any book with the given ISBN or title
         books.RemoveAll(b => b.ISBN == identifier);
         WriteToCSV();
@@ -293,6 +298,8 @@ public class BookInventory
     // DONE!
     public void UpdateBookDetails(string identifier)
     {
+        // read the CSV file
+        books = ReadFromCSV();
         // find the book to update
         Book book = books.Find(b => b.ISBN == identifier);
         if (book == null)
@@ -336,6 +343,7 @@ public class BookInventory
     // DONE!
     public Book SearchBook(string title = null, string author = null, string isbn = null)
     {
+        books = ReadFromCSV();
         // search for a book by title, author, or ISBN
         Book book = books.Find(b => b.Title == title || b.Author == author || b.ISBN == isbn);
         if (book == null)
