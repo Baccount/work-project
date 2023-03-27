@@ -310,14 +310,14 @@ public class BookInventory
         else if (option == 2)
         {
             try{
-                Console.Write("Is the book Borrowed?: ");
+                Console.Write("Is the book Borrowed? True or False: ");
                 bool isBorrowed = bool.Parse(Console.ReadLine());
                 book.IsBorrowed = isBorrowed;
                 WriteToCSV();
-            }
-            catch(Exception e){
-                Console.WriteLine(e.Message);
-            }
+                }
+                catch(Exception e){
+                    Console.WriteLine(e.Message);
+                }
         }
         else
         {
