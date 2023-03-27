@@ -63,33 +63,38 @@ public class Program
 
     private static void AddNewBook()
     {
-        Console.Write("Enter book title: ");
-        string title = Console.ReadLine();
+        try{
+            Console.Write("Enter book title: ");
+            string title = Console.ReadLine();
 
-        Console.Write("Enter book author: ");
-        string author = Console.ReadLine();
+            Console.Write("Enter book author: ");
+            string author = Console.ReadLine();
 
-        Console.Write("Enter book ISBN: ");
-        string isbn = Console.ReadLine();
+            Console.Write("Enter book ISBN: ");
+            string isbn = Console.ReadLine();
 
-        Console.Write("Enter book publication date (YYYY-MM-DD): ");
-        DateTime publicationDate = DateTime.Parse(Console.ReadLine());
+            Console.Write("Enter book publication date (YYYY-MM-DD): ");
+            DateTime publicationDate = DateTime.Parse(Console.ReadLine());
 
-        Console.Write("Enter number of copies: ");
-        int numberOfCopies = int.Parse(Console.ReadLine());
+            Console.Write("Enter number of copies: ");
+            int numberOfCopies = int.Parse(Console.ReadLine());
 
-        Book book = new Book
-        {
-            Title = title,
-            Author = author,
-            ISBN = isbn,
-            PublicationDate = publicationDate,
-            NumberOfCopies = numberOfCopies,
-            IsBorrowed = false
-        };
+            Book book = new Book
+            {
+                Title = title,
+                Author = author,
+                ISBN = isbn,
+                PublicationDate = publicationDate,
+                NumberOfCopies = numberOfCopies,
+                IsBorrowed = false
+            };
 
-        inventory.AddBook(book);
-        Console.WriteLine("Book added successfully.");
+            inventory.AddBook(book);
+            Console.WriteLine("Book added successfully.");
+        }
+        catch(Exception e){
+            Console.WriteLine(e.Message);
+        }
     }
 
     private static void RemoveBook()
@@ -230,19 +235,17 @@ private static void SearchBook()
 
 public class BookInventory
 {
-    // create "inventory.csv" if it doesn't exist
 
     private List<Book> books;
     private string inventoryFilePath = "inventory.csv";
 
     public BookInventory()
     {
-
         CreateCSVFile();
         books = ReadFromCSV();
     }
 
-
+    // DONE!
     private void CreateCSVFile()
     {
         // create the CSV file if it doesn't exist
@@ -251,6 +254,7 @@ public class BookInventory
             File.Create(inventoryFilePath).Close();
         }
     }
+    // DONE!
     private List<Book> ReadFromCSV()
     {
         try
@@ -269,7 +273,7 @@ public class BookInventory
             return new List<Book>();
         }
     }
-
+    // DONE!
     private void WriteToCSV()
     {
         try
@@ -296,6 +300,7 @@ public class BookInventory
 
     // Implement UpdateBookDetails, and SearchBook methods
 
+    // DONE!
     public void AddBook(Book book)
     {
         // write the book to the CSV file
@@ -303,13 +308,20 @@ public class BookInventory
         WriteToCSV();
     }
 
-
+    // DONE!
     public void RemoveBook(string identifier)
     {
         // remove any book with the given ISBN or title
         books.RemoveAll(b => b.ISBN == identifier);
         WriteToCSV();
 
+    }
+    // TODO in progress
+    public void UpdateBookDetails(string identifier, Book book)
+    {
+        //The program should allow the user to update the book details, such as the number of copies or the loan status,
+        //by entering the book's ISBN or title.
+        // find 
     }
 
 
@@ -319,7 +331,7 @@ public class BookInventory
 
 
 
-
+    // DONE!
     public class BookMap : ClassMap<Book>
 {
     public BookMap()
