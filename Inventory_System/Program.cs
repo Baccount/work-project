@@ -97,6 +97,8 @@ public class Program
         Console.Write("Enter book ISBN or title to remove: ");
         string identifier = Console.ReadLine();
 
+        inventory.RemoveBook(identifier);
+
         //inventory.RemoveBook(identifier);
         Console.WriteLine("Book removed successfully.");
     }
@@ -292,7 +294,7 @@ public class BookInventory
 
 
 
-    // Implement AddBook, RemoveBook, UpdateBookDetails, and SearchBook methods
+    // Implement UpdateBookDetails, and SearchBook methods
 
     public void AddBook(Book book)
     {
@@ -300,6 +302,17 @@ public class BookInventory
         books.Add(book);
         WriteToCSV();
     }
+
+
+    public void RemoveBook(string identifier)
+    {
+        // remove any book with the given ISBN or title
+        books.RemoveAll(b => b.ISBN == identifier);
+        WriteToCSV();
+
+    }
+
+
 
 }
 
