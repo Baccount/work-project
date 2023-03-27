@@ -112,7 +112,6 @@ public class Program
         string identifier = Console.ReadLine();
         inventory.UpdateBookDetails(identifier);
     }
-    // TODO 1: Implement the SearchBook method
 private static void SearchBook()
     {
         
