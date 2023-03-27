@@ -295,17 +295,21 @@ public class BookInventory
             return;
         }
         // if book is found, update the book details and write to CSV file
-        Console.Write("1. Enter number of copies: ");
+        Console.Write("1. Enter number of copies ");
         Console.WriteLine();
-        Console.Write("2. Is the book Borrowed?: ");
-        Console.WriteLine();
+        Console.Write("2. Is the book Borrowed? ");
         int option = int.Parse(Console.ReadLine());
         if (option == 1)
         {
-            Console.Write("Enter number of copies: ");
-            int numberOfCopies = int.Parse(Console.ReadLine());
-            book.NumberOfCopies = numberOfCopies;
-            WriteToCSV();
+            try{
+                Console.Write("Enter number of copies: ");
+                int numberOfCopies = int.Parse(Console.ReadLine());
+                book.NumberOfCopies = numberOfCopies;
+                WriteToCSV();
+                }
+                catch(Exception e){
+                    Console.WriteLine(e.Message);
+                }
         }
         else if (option == 2)
         {
