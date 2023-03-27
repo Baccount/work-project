@@ -297,7 +297,8 @@ public class BookInventory
         // if book is found, update the book details and write to CSV file
         Console.Write("1. Enter number of copies ");
         Console.WriteLine();
-        Console.Write("2. Is the book Borrowed? ");
+        Console.Write("2. Change loan status ");
+        Console.WriteLine();
         int option = int.Parse(Console.ReadLine());
         if (option == 1)
         {
