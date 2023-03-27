@@ -88,7 +88,7 @@ public class Program
             IsBorrowed = false
         };
 
-        //inventory.AddBook(book);
+        inventory.AddBook(book);
         Console.WriteLine("Book added successfully.");
     }
 
@@ -226,18 +226,29 @@ private static void SearchBook()
 
 
 
-    public class BookInventory
+public class BookInventory
 {
+    // create "inventory.csv" if it doesn't exist
+
     private List<Book> books;
     private string inventoryFilePath = "inventory.csv";
 
     public BookInventory()
     {
+
+        CreateCSVFile();
         books = ReadFromCSV();
     }
 
-    // Other methods as before, plus:
 
+    private void CreateCSVFile()
+    {
+        // create the CSV file if it doesn't exist
+        if (!File.Exists(inventoryFilePath))
+        {
+            File.Create(inventoryFilePath).Close();
+        }
+    }
     private List<Book> ReadFromCSV()
     {
         try
@@ -262,19 +273,36 @@ private static void SearchBook()
         try
         {
             using (var writer = new StreamWriter(inventoryFilePath))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = "," }))
             {
-                csv.Context.AutoMap<BookMap>();
+
+                // write the data to the CSV file
                 csv.WriteRecords(books);
             }
         }
-        catch (Exception ex)
+        catch (IOException ex)
         {
             Console.WriteLine($"Error writing to CSV file: {ex.Message}");
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unexpected error: {ex.Message}");
+        }
     }
 
+
+
     // Implement AddBook, RemoveBook, UpdateBookDetails, and SearchBook methods
+
+    public void AddBook(Book book)
+    {
+        // write the book to the CSV file
+        books.Add(book);
+        WriteToCSV();
+    }
+
+}
+
 
 
 
@@ -290,5 +318,4 @@ private static void SearchBook()
         Map(m => m.NumberOfCopies).Name("NumberOfCopies");
         Map(m => m.IsBorrowed).Name("IsBorrowed");
     }
-}
 }
