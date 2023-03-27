@@ -111,7 +111,7 @@ public class Program
     private static void UpdateBook()
     {
         // Run the UpdateBookDetails method
-        Console.Write("Enter book ISBN or title to update: ");
+        Console.Write("Enter the ISBN of your book: ");
         string identifier = Console.ReadLine();
         inventory.UpdateBookDetails(identifier);
     }
@@ -126,7 +126,7 @@ private static void SearchBook()
 
         Console.WriteLine("Enter search term:");
         string searchTerm = Console.ReadLine();
-
+        Console.WriteLine();
         Book foundBook = null;
 
         switch (option)
