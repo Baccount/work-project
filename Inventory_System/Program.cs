@@ -5,6 +5,7 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration;
+//using System.Linq;
 
 public class Book
 {
@@ -273,17 +274,35 @@ public class BookInventory
 
 
 
-    // Implement UpdateBookDetails, and SearchBook methods
-
     // DONE!
     public void AddBook(Book book)
     {
-        // read the CSV file
+        // Read the CSV file
         books = ReadFromCSV();
-        // write the book to the CSV file
-        books.Add(book);
+        // Used the LINQ FirstOrDefault method to find the first occurrence of the book with the same
+        Book existingBook = books.FirstOrDefault(b => b.ISBN == book.ISBN);
+
+        if (existingBook != null)
+        {
+            // If the book already exists, update the number of copies
+            existingBook.NumberOfCopies += book.NumberOfCopies;
+        }
+        else
+        {
+            // If the book doesn't exist, add it to the list
+            books.Add(book);
+        }
+        // Write the updated list to the CSV file
         WriteToCSV();
     }
+
+
+
+
+
+
+
+
 
     // DONE!
     public void RemoveBook(string identifier)
