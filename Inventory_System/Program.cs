@@ -49,7 +49,7 @@ public class Program
                     UpdateBook();
                     break;
                 case 4:
-                    //SearchBook();
+                    SearchBook();
                     break;
                 case 5:
                     exit = true;
@@ -115,9 +115,13 @@ public class Program
         string identifier = Console.ReadLine();
         inventory.UpdateBookDetails(identifier);
     }
+    // TODO 1: Implement the SearchBook method
 private static void SearchBook()
     {
-        Console.WriteLine("Search by: 1) Title, 2) Author, or 3) ISBN");
+        Console.WriteLine("Search by:");
+        Console.WriteLine("1. Title");
+        Console.WriteLine("2. Author");
+        Console.WriteLine("3. ISBN");
         int option = int.Parse(Console.ReadLine());
 
         Console.WriteLine("Enter search term:");
@@ -128,13 +132,13 @@ private static void SearchBook()
         switch (option)
         {
             case 1:
-                //foundBook = inventory.SearchBook(title: searchTerm);
+                foundBook = inventory.SearchBook(title: searchTerm);
                 break;
             case 2:
-                //foundBook = inventory.SearchBook(author: searchTerm);
+                foundBook = inventory.SearchBook(author: searchTerm);
                 break;
             case 3:
-                //foundBook = inventory.SearchBook(isbn: searchTerm);
+                foundBook = inventory.SearchBook(isbn: searchTerm);
                 break;
             default:
                 Console.WriteLine("Invalid option.");
@@ -143,12 +147,14 @@ private static void SearchBook()
 
         if (foundBook != null)
         {
+            Console.WriteLine("Book found:");
             Console.WriteLine($"Title: {foundBook.Title}");
             Console.WriteLine($"Author: {foundBook.Author}");
             Console.WriteLine($"ISBN: {foundBook.ISBN}");
             Console.WriteLine($"Publication Date: {foundBook.PublicationDate}");
             Console.WriteLine($"Number of Copies: {foundBook.NumberOfCopies}");
             Console.WriteLine($"Loan Status: {(foundBook.IsBorrowed ? "Borrowed" : "Available")}");
+            Console.WriteLine();
         }
         else
         {
@@ -284,7 +290,7 @@ public class BookInventory
         WriteToCSV();
 
     }
-    // TODO in progress
+    // DONE!
     public void UpdateBookDetails(string identifier)
     {
         // find the book to update
@@ -295,10 +301,8 @@ public class BookInventory
             return;
         }
         // if book is found, update the book details and write to CSV file
-        Console.Write("1. Enter number of copies ");
-        Console.WriteLine();
-        Console.Write("2. Change loan status ");
-        Console.WriteLine();
+        Console.WriteLine("1. Enter number of copies ");
+        Console.WriteLine("2. Change loan status ");
         int option = int.Parse(Console.ReadLine());
         if (option == 1)
         {
@@ -329,6 +333,24 @@ public class BookInventory
             Console.WriteLine("Invalid option.");
         }
     }
+    // DONE!
+    public Book SearchBook(string title = null, string author = null, string isbn = null)
+    {
+        // search for a book by title, author, or ISBN
+        Book book = books.Find(b => b.Title == title || b.Author == author || b.ISBN == isbn);
+        if (book == null)
+        {
+            return null;
+        }
+        return book;
+    }
+
+
+
+
+
+
+
 }
 
 
