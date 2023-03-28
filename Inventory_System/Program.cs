@@ -5,25 +5,41 @@ using CsvHelper.Configuration;
 
 public class Book
 {
+    // Declare a nullable string property called Title with getter and setter
     public string? Title { get; set; }
+
+    // Declare a nullable string property called Author with getter and setter
     public string? Author { get; set; }
+
+    // Declare a nullable string property called ISBN with getter and setter
     public string? ISBN { get; set; }
+
+    // Declare a DateTime property called PublicationDate with getter and setter
     public DateTime PublicationDate { get; set; }
+
+    // Declare an int property called NumberOfCopies with getter and setter
     public int NumberOfCopies { get; set; }
+
+    // Declare a bool property called IsBorrowed with getter and setter
     public bool IsBorrowed { get; set; }
 }
 
 
 public class Program
 {
+    // Declare a static BookInventory object called inventory
     private static BookInventory inventory = new BookInventory();
 
+    // Define the Main method, which is the entry point of the console application
     public static void Main(string[] args)
     {
+        // Declare a boolean variable called exit and initialize it to false
         bool exit = false;
 
+        // Use a while loop to keep the menu running until the user decides to exit
         while (!exit)
         {
+            // Display the menu options to the user
             Console.WriteLine("Book Inventory Management");
             Console.WriteLine("1. Add new book");
             Console.WriteLine("2. Remove book");
@@ -31,9 +47,11 @@ public class Program
             Console.WriteLine("4. Search book");
             Console.WriteLine("5. Exit");
 
+            // Prompt the user to enter their choice
             Console.Write("Enter your choice: ");
             int choice = int.Parse(Console.ReadLine());
 
+            // Execute the appropriate action based on the user's choice
             switch (choice)
             {
                 case 1:
@@ -49,6 +67,7 @@ public class Program
                     SearchBook();
                     break;
                 case 5:
+                    // Set the exit variable to true to exit the while loop and end the program
                     exit = true;
                     break;
                 default:
@@ -60,7 +79,9 @@ public class Program
 
     private static void AddNewBook()
     {
-        try{
+        try
+        {
+            // Prompt the user to enter the book details
             Console.Write("Enter book title: ");
             string title = Console.ReadLine();
 
@@ -76,6 +97,7 @@ public class Program
             Console.Write("Enter number of copies: ");
             int numberOfCopies = int.Parse(Console.ReadLine());
 
+            // Create a new Book object and set its properties with the entered values
             Book book = new Book
             {
                 Title = title,
@@ -86,7 +108,9 @@ public class Program
                 IsBorrowed = false
             };
 
+            // Call the AddBook method from the inventory object with the new book
             inventory.AddBook(book);
+
             Console.WriteLine("Book added successfully.");
         }
         catch(Exception e){
@@ -96,35 +120,46 @@ public class Program
 
     private static void RemoveBook()
     {
+        // Prompt the user to enter the book's ISBN or title to remove
         Console.Write("Enter book ISBN or title to remove: ");
         string identifier = Console.ReadLine();
 
+        // Call the RemoveBook method from the inventory object with the given identifier
         inventory.RemoveBook(identifier);
 
+        // Display a message to the user indicating the book has been removed successfully
         Console.WriteLine("Book removed successfully.");
     }
 
     private static void UpdateBook()
     {
-        // Run the UpdateBookDetails method
+        // Prompt the user to enter the ISBN of the book to update
         Console.Write("Enter the ISBN of your book: ");
         string identifier = Console.ReadLine();
+
+        // Call the UpdateBookDetails method from the inventory object with the given identifier
         inventory.UpdateBookDetails(identifier);
     }
 private static void SearchBook()
     {
-        
+        // Display search options to the user
         Console.WriteLine("Search by:");
         Console.WriteLine("1. Title");
         Console.WriteLine("2. Author");
         Console.WriteLine("3. ISBN");
+
+        // Read the user's search option as an integer
         int option = int.Parse(Console.ReadLine());
 
+        // Prompt the user to enter the search term
         Console.WriteLine("Enter search term:");
         string searchTerm = Console.ReadLine();
         Console.WriteLine();
+
+        // Declare a nullable Book object called foundBook and initialize it to null
         Book? foundBook = null;
 
+        // Search for the book based on the user's search option
         switch (option)
         {
             case 1:
@@ -140,7 +175,7 @@ private static void SearchBook()
                 Console.WriteLine("Invalid option.");
                 break;
         }
-
+        // If a book is found, display its details
         if (foundBook != null)
         {
             Console.WriteLine("Book found:");
@@ -152,6 +187,7 @@ private static void SearchBook()
             Console.WriteLine($"Loan Status: {(foundBook.IsBorrowed ? "Borrowed" : "Available")}");
             Console.WriteLine();
         }
+        // If no book is found, display a message to the user
         else
         {
             Console.WriteLine("Book not found.");
@@ -419,7 +455,7 @@ public class BookInventory
 // Define a class called BookMap that inherits from ClassMap<Book> provided by CsvHelper
 public class BookMap : ClassMap<Book>
 {
-    // Constructor for the BookMap class
+    // BookMap constructor for mapping Book properties to CSV columns
     public BookMap()
     {
         Map(m => m.Title).Name("Title");
