@@ -118,6 +118,7 @@ public class Program
         }
     }
 
+// TODO allow user to remove book by ISBN or title
     private static void RemoveBook()
     {
         // Prompt the user to enter the book's ISBN or title to remove
@@ -361,8 +362,8 @@ public class BookInventory
         // Read the books from the CSV file and store them in the books list
         books = ReadFromCSV();
 
-        // Remove any book with the given identifier (ISBN) from the books list
-        books.RemoveAll(b => b.ISBN == identifier);
+        // Remove any book with the given identifier (ISBN) or title from the books list
+        books.RemoveAll(b => b.ISBN == identifier || b.Title == identifier);
 
         // Write the updated books list back to the CSV file
         WriteToCSV();
