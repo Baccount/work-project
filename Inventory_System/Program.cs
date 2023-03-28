@@ -472,6 +472,9 @@ public class BookInventory
                 Console.WriteLine("Invalid option.");
                 break;
         }
+        Console.WriteLine();
+        Console.WriteLine("Book details updated.");
+        Console.WriteLine();
     }
 
     public Book? SearchBook(string? title = null, string? author = null, string? isbn = null)
