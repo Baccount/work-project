@@ -2,17 +2,6 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 
-// Represents a book with related properties
-public class Book
-{
-    public string? Title { get; set; }
-    public string? Author { get; set; }
-    public string? ISBN { get; set; }
-    public DateTime PublicationDate { get; set; }
-    public int NumberOfCopies { get; set; }
-    public bool IsBorrowed { get; set; }
-}
-
 
 public class Program
 {
@@ -100,6 +89,7 @@ public class Program
             // Call the AddBook method from the inventory object with the new book
             inventory.AddBook(book);
 
+            Console.WriteLine();
             Console.WriteLine("Book added successfully.");
             Console.WriteLine();
         }
@@ -486,4 +476,15 @@ public class BookMap : ClassMap<Book>
         Map(m => m.NumberOfCopies).Name("NumberOfCopies");
         Map(m => m.IsBorrowed).Name("IsBorrowed");
     }
+}
+
+// Represents a book with related properties
+public class Book
+{
+    public string? Title { get; set; }
+    public string? Author { get; set; }
+    public string? ISBN { get; set; }
+    public DateTime PublicationDate { get; set; }
+    public int NumberOfCopies { get; set; }
+    public bool IsBorrowed { get; set; }
 }
