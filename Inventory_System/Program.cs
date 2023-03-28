@@ -2,25 +2,14 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 
-
+// Represents a book with related properties
 public class Book
 {
-    // Declare a nullable string property called Title with getter and setter
     public string? Title { get; set; }
-
-    // Declare a nullable string property called Author with getter and setter
     public string? Author { get; set; }
-
-    // Declare a nullable string property called ISBN with getter and setter
     public string? ISBN { get; set; }
-
-    // Declare a DateTime property called PublicationDate with getter and setter
     public DateTime PublicationDate { get; set; }
-
-    // Declare an int property called NumberOfCopies with getter and setter
     public int NumberOfCopies { get; set; }
-
-    // Declare a bool property called IsBorrowed with getter and setter
     public bool IsBorrowed { get; set; }
 }
 
