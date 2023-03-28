@@ -392,7 +392,7 @@ public class BookInventory
         Console.WriteLine("2. Change loan status ");
 
         // Read the user's choice from the console
-        int option = int.Parse(Console.ReadLine());
+        int option = int.Parse(Console.ReadLine() );
 
 
         switch (option) {
@@ -404,7 +404,7 @@ public class BookInventory
                     while (!validInt)
                     {
                         Console.Write("Enter number of copies: ");
-                        string input = Console.ReadLine();
+                        string input = Console.ReadLine() ?? "";
 
                         // Check if the input can be parsed as an integer
                         if (int.TryParse(input, out numberOfCopies))
@@ -435,7 +435,7 @@ public class BookInventory
                     {
                         // Prompt the user for the new loan status
                         Console.Write("Is the book Borrowed? True or False: ");
-                        string input = Console.ReadLine();
+                        string input = Console.ReadLine() ?? "";
 
                         // Parse the user input, allowing for case-insensitive input
                         if (bool.TryParse(input, out bool isBorrowed))
