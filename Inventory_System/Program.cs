@@ -112,6 +112,7 @@ public class Program
             inventory.AddBook(book);
 
             Console.WriteLine("Book added successfully.");
+            Console.WriteLine();
         }
         catch(Exception e){
             Console.WriteLine(e.Message);
