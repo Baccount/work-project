@@ -402,29 +402,38 @@ public class BookInventory
                 break;
 
             case 2:
-                try
+                bool validInput = false;
+
+                while (!validInput)
                 {
-                    // Prompt the user for the new loan status
-                    Console.Write("Is the book Borrowed? True or False: ");
-                    string input = Console.ReadLine();
-
-                    // Parse the user input, allowing for case-insensitive input
-                    if (bool.TryParse(input, out bool isBorrowed))
+                    try
                     {
-                        // Update the book's loan status
-                        book.IsBorrowed = isBorrowed;
+                        // Prompt the user for the new loan status
+                        Console.Write("Is the book Borrowed? True or False: ");
+                        string input = Console.ReadLine();
 
-                        // Write the updated books list back to the CSV file
-                        WriteToCSV();
+                        // Parse the user input, allowing for case-insensitive input
+                        if (bool.TryParse(input, out bool isBorrowed))
+                        {
+                            // Update the book's loan status
+                            book.IsBorrowed = isBorrowed;
+
+                            // Write the updated books list back to the CSV file
+                            WriteToCSV();
+
+                            // Set validInput to true to exit the loop
+                            validInput = true;
+                        }
+                        else
+                        {
+                            // Handle invalid input
+                            Console.WriteLine("Invalid input. Please enter 'True' or 'False'.");
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        // Handle invalid input
-                        Console.WriteLine("Invalid input. Please enter 'True' or 'False'.");
+                        Console.WriteLine(e.Message);
                     }
-                }
-                catch(Exception e){
-                    Console.WriteLine(e.Message);
                 }
                 break;
             default:
