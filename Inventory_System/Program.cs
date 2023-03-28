@@ -138,7 +138,7 @@ public class Program
 private static void SearchBook()
     {
         // Display search options to the user
-        Console.WriteLine("Search by:");
+        Console.WriteLine("Search by");
         Console.WriteLine("1. Title");
         Console.WriteLine("2. Author");
         Console.WriteLine("3. ISBN");
@@ -479,7 +479,14 @@ public class BookInventory
         // Read books from the CSV file and store them in the books list
         books = ReadFromCSV();
 
-        // Find the first book in the books list that matches the provided title, author, or ISBN, or return null if no match is found
+        // Lowercase all the search parameters
+        title = title?.ToLower();
+        author = author?.ToLower();
+
+
+
+        // Use the LINQ FirstOrDefault method to find the first occurrence of a book with the same ISBN, title or author
+
         Book book = books.FirstOrDefault(b => (title == null || b.Title == title) &&
                                         (author == null || b.Author == author) &&
                                         (isbn == null || b.ISBN == isbn));
