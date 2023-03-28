@@ -205,38 +205,59 @@ private static void SearchBook()
 
 public class BookInventory
 {
+    // Declare a private list of Book objects called books
     private List<Book> books;
+
+    // Declare a private string called inventoryFilePath, which represents the path to the inventory CSV file
     private string inventoryFilePath = "inventory.csv";
 
+    // Define the constructor for the BookInventory class
     public BookInventory()
     {
+        // Call the CreateCSVFile method to create the CSV file if it doesn't already exist
         CreateCSVFile();
+
+        // Call the ReadFromCSV method to read the books list from the CSV file
         books = ReadFromCSV();
     }
 
     private void CreateCSVFile()
     {
-        // create the CSV file if it doesn't exist
+        // Check if the CSV file exists at the specified inventoryFilePath
         if (!File.Exists(inventoryFilePath))
         {
+            // If the CSV file doesn't exist, create it and close the file handle
             File.Create(inventoryFilePath).Close();
         }
     }
+
+
+
+
     private List<Book> ReadFromCSV()
     {
         try
         {
+            // Create a StreamReader instance to read from the inventoryFilePath
             using (var reader = new StreamReader(inventoryFilePath))
+            // Create a CsvReader instance with CultureInfo.InvariantCulture
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
+                // Register the BookMap class to configure the mapping between the Book class and the CSV columns
                 csv.Context.RegisterClassMap<BookMap>();
+
+                // Read the records from the CSV file and convert them to a list of Book objects
                 var records = csv.GetRecords<Book>().ToList();
+
+                // Return the list of Book objects
                 return records;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error reading from CSV file: {ex.Message}");
+
+            // Return an empty list of Book objects in case of an error
             return new List<Book>();
         }
     }
@@ -245,11 +266,12 @@ public class BookInventory
     {
         try
         {
+            // Create a StreamWriter instance to write to the inventoryFilePath
             using (var writer = new StreamWriter(inventoryFilePath))
+            // Create a CsvWriter instance with a specified delimiter and CultureInfo
             using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = "," }))
             {
-
-                // write the data to the CSV file
+                // Write the data from the books list to the CSV file
                 csv.WriteRecords(books);
             }
         }
@@ -268,14 +290,15 @@ public class BookInventory
 
     public void AddBook(Book book)
     {
-        // Read the CSV file
+        // Read the books from the CSV file and store them in the books list
         books = ReadFromCSV();
-        // Used the LINQ FirstOrDefault method to find the first occurrence of the book with the same
+
+        // Use the LINQ FirstOrDefault method to find the first occurrence of a book with the same ISBN
         Book existingBook = books.FirstOrDefault(b => b.ISBN == book.ISBN);
 
         if (existingBook != null)
         {
-            // If the book already exists, update the number of copies
+            // If the book already exists, update the number of copies by adding the new copies
             existingBook.NumberOfCopies += book.NumberOfCopies;
         }
         else
@@ -283,7 +306,8 @@ public class BookInventory
             // If the book doesn't exist, add it to the list
             books.Add(book);
         }
-        // Write the updated list to the CSV file
+
+        // Write the updated books list back to the CSV file
         WriteToCSV();
     }
 
