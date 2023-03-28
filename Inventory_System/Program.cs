@@ -101,7 +101,6 @@ public class Program
 
         inventory.RemoveBook(identifier);
 
-        //inventory.RemoveBook(identifier);
         Console.WriteLine("Book removed successfully.");
     }
 
@@ -206,7 +205,6 @@ private static void SearchBook()
 
 public class BookInventory
 {
-
     private List<Book> books;
     private string inventoryFilePath = "inventory.csv";
 
@@ -216,7 +214,6 @@ public class BookInventory
         books = ReadFromCSV();
     }
 
-    // DONE!
     private void CreateCSVFile()
     {
         // create the CSV file if it doesn't exist
@@ -225,7 +222,6 @@ public class BookInventory
             File.Create(inventoryFilePath).Close();
         }
     }
-    // DONE!
     private List<Book> ReadFromCSV()
     {
         try
@@ -244,7 +240,7 @@ public class BookInventory
             return new List<Book>();
         }
     }
-    // DONE!
+
     private void WriteToCSV()
     {
         try
@@ -269,7 +265,7 @@ public class BookInventory
 
 
 
-    // DONE!
+
     public void AddBook(Book book)
     {
         // Read the CSV file
@@ -299,7 +295,7 @@ public class BookInventory
 
 
 
-    // DONE!
+
     public void RemoveBook(string identifier)
     {
         // read the CSV file
@@ -309,7 +305,7 @@ public class BookInventory
         WriteToCSV();
 
     }
-    // DONE!
+
     public void UpdateBookDetails(string identifier)
     {
         // read the CSV file
@@ -325,9 +321,9 @@ public class BookInventory
         Console.WriteLine("1. Enter number of copies ");
         Console.WriteLine("2. Change loan status ");
         int option = int.Parse(Console.ReadLine());
-        if (option == 1)
-        {
-            try{
+        switch (option) {
+            case 1:
+                try{
                 Console.Write("Enter number of copies: ");
                 int numberOfCopies = int.Parse(Console.ReadLine());
                 book.NumberOfCopies = numberOfCopies;
@@ -336,10 +332,9 @@ public class BookInventory
                 catch(Exception e){
                     Console.WriteLine(e.Message);
                 }
-        }
-        else if (option == 2)
-        {
-            try{
+                break;
+            case 2:
+                try{
                 Console.Write("Is the book Borrowed? True or False: ");
                 bool isBorrowed = bool.Parse(Console.ReadLine());
                 book.IsBorrowed = isBorrowed;
@@ -348,13 +343,13 @@ public class BookInventory
                 catch(Exception e){
                     Console.WriteLine(e.Message);
                 }
-        }
-        else
-        {
-            Console.WriteLine("Invalid option.");
+                break;
+            default:
+                Console.WriteLine("Invalid option.");
+                break;
         }
     }
-    // DONE!
+
     public Book? SearchBook(string? title = null, string? author = null, string? isbn = null)
     {
         books = ReadFromCSV();
@@ -368,19 +363,12 @@ public class BookInventory
         }
         return book;
     }
-
-
-
-
-
-
-
 }
 
 
 
 
-    // DONE!
+
     public class BookMap : ClassMap<Book>
 {
     public BookMap()
