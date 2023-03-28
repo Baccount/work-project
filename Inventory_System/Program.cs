@@ -31,7 +31,16 @@ public class Program
 
             // Prompt the user to enter their choice
             Console.Write("Enter your choice: ");
-            int choice = int.Parse(Console.ReadLine());
+            string input = Console.ReadLine();
+            int choice;
+
+            if (!int.TryParse(input, out choice))
+            {
+                // Parsing failed
+                // Handle the error or prompt the user to enter a valid input
+                Console.WriteLine("Invalid choice. Please try again.");
+                Main(args);
+            }
 
             // Execute the appropriate action based on the user's choice
             switch (choice)
