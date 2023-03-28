@@ -31,7 +31,7 @@ public class Program
 
             // Prompt the user to enter their choice
             Console.Write("Enter your choice: ");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine() ?? "";
             int choice;
 
             if (!int.TryParse(input, out choice))
@@ -74,19 +74,19 @@ public class Program
         {
             // Prompt the user to enter the book details
             Console.Write("Enter book title: ");
-            string title = Console.ReadLine();
+            string title = Console.ReadLine() ?? "Default Title";
 
             Console.Write("Enter book author: ");
-            string author = Console.ReadLine();
+            string author = Console.ReadLine() ?? "Default Author";
 
             Console.Write("Enter book ISBN: ");
-            string isbn = Console.ReadLine();
+            string isbn = Console.ReadLine() ?? "0000000000000";
 
             Console.Write("Enter book publication date (YYYY-MM-DD): ");
-            DateTime publicationDate = DateTime.Parse(Console.ReadLine());
+            DateTime publicationDate = DateTime.Parse(Console.ReadLine() ?? "0001-01-01");
 
             Console.Write("Enter number of copies: ");
-            int numberOfCopies = int.Parse(Console.ReadLine());
+            int numberOfCopies = int.Parse(Console.ReadLine() ?? "0");
 
             // Create a new Book object and set its properties with the entered values
             Book book = new Book
