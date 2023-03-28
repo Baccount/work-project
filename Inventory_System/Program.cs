@@ -117,7 +117,7 @@ public class Program
     {
         // Prompt the user to enter the book's ISBN or title to remove
         Console.Write("Enter book ISBN or title to remove: ");
-        string identifier = Console.ReadLine();
+        string identifier = Console.ReadLine() ?? "";
 
         // Call the RemoveBook method from the inventory object with the given identifier
         inventory.RemoveBook(identifier);
@@ -130,7 +130,7 @@ public class Program
     {
         // Prompt the user to enter the ISBN or Title of the book to update
         Console.Write("Enter the ISBN or Title of your book: ");
-        string identifier = Console.ReadLine();
+        string identifier = Console.ReadLine() ?? "";
 
         // Call the UpdateBookDetails method from the inventory object with the given identifier
         inventory.UpdateBookDetails(identifier);
@@ -144,12 +144,26 @@ private static void SearchBook()
         Console.WriteLine("3. ISBN");
 
         // Read the user's search option as an integer
-        int option = int.Parse(Console.ReadLine());
+        int option = int.Parse(Console.ReadLine() ?? "0");
 
         // Prompt the user to enter the search term
         Console.WriteLine("Enter search term:");
-        string searchTerm = Console.ReadLine();
+        string searchTerm = Console.ReadLine() ?? "";
         Console.WriteLine();
+
+        // Check if the search term is empty or the option is 0
+        if (searchTerm == "" || option == 0)
+        {
+            // Inform the user that the search term or option is invalid
+            Console.WriteLine("Invalid search term or invalid option.");
+
+            // Print an empty line for better output readability
+            Console.WriteLine();
+
+            // Call the SearchBook function to prompt the user for a new search term and option
+            SearchBook();
+        }
+
 
         // Declare a nullable Book object called foundBook and initialize it to null
         Book? foundBook = null;
@@ -168,6 +182,8 @@ private static void SearchBook()
                 break;
             default:
                 Console.WriteLine("Invalid option.");
+                Console.WriteLine();
+                SearchBook();
                 break;
         }
         // If a book is found, display its details
