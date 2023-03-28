@@ -392,7 +392,14 @@ public class BookInventory
         Console.WriteLine("2. Change loan status ");
 
         // Read the user's choice from the console
-        int option = int.Parse(Console.ReadLine() );
+        int option = int.Parse(Console.ReadLine() ?? "0");
+
+        // If the user enters an invalid option, display a message and call the UpdateBookDetails method again
+        if (option == 0)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid integer.");
+            UpdateBookDetails(identifier);
+        }
 
 
         switch (option) {
