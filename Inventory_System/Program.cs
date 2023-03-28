@@ -352,25 +352,33 @@ public class BookInventory
 
     public Book? SearchBook(string? title = null, string? author = null, string? isbn = null)
     {
+        // Read books from the CSV file and store them in the books list
         books = ReadFromCSV();
-        // Search for a book by title, author, or ISBN
+
+        // Find the first book in the books list that matches the provided title, author, or ISBN, or return null if no match is found
         Book book = books.FirstOrDefault(b => (title == null || b.Title == title) &&
                                         (author == null || b.Author == author) &&
                                         (isbn == null || b.ISBN == isbn));
+
+        // If no matching book is found, return null
         if (book == null)
         {
             return null;
         }
+
+        // If a matching book is found, return it
         return book;
     }
+
 }
 
 
 
 
-
-    public class BookMap : ClassMap<Book>
+// Define a class called BookMap that inherits from ClassMap<Book> provided by CsvHelper
+public class BookMap : ClassMap<Book>
 {
+    // Constructor for the BookMap class
     public BookMap()
     {
         Map(m => m.Title).Name("Title");
