@@ -192,6 +192,7 @@ private static void SearchBook()
         else
         {
             Console.WriteLine("Book not found.");
+            Console.WriteLine();
         }
     }
 }
@@ -372,6 +373,7 @@ public class BookInventory
         if (book == null)
         {
             Console.WriteLine("Book not found.");
+            Console.WriteLine();
             return;
         }
 
@@ -400,14 +402,26 @@ public class BookInventory
                 break;
 
             case 2:
-                try{
-                // Prompt the user for the new loan status and update the book
-                Console.Write("Is the book Borrowed? True or False: ");
-                bool isBorrowed = bool.Parse(Console.ReadLine());
-                book.IsBorrowed = isBorrowed;
+                try
+                {
+                    // Prompt the user for the new loan status
+                    Console.Write("Is the book Borrowed? True or False: ");
+                    string input = Console.ReadLine();
 
-                // Write the updated books list back to the CSV file
-                WriteToCSV();
+                    // Parse the user input, allowing for case-insensitive input
+                    if (bool.TryParse(input, out bool isBorrowed))
+                    {
+                        // Update the book's loan status
+                        book.IsBorrowed = isBorrowed;
+
+                        // Write the updated books list back to the CSV file
+                        WriteToCSV();
+                    }
+                    else
+                    {
+                        // Handle invalid input
+                        Console.WriteLine("Invalid input. Please enter 'True' or 'False'.");
+                    }
                 }
                 catch(Exception e){
                     Console.WriteLine(e.Message);
