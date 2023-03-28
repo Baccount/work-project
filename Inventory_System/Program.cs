@@ -388,17 +388,32 @@ public class BookInventory
         switch (option) {
             case 1:
                 try{
-                // Prompt the user for the new number of copies and update the book
-                Console.Write("Enter number of copies: ");
-                int numberOfCopies = int.Parse(Console.ReadLine());
-                book.NumberOfCopies = numberOfCopies;
+                    int numberOfCopies;
+                    bool validInt = false;
 
-                // Write the updated books list back to the CSV file
-                WriteToCSV();
+                    while (!validInt)
+                    {
+                        Console.Write("Enter number of copies: ");
+                        string input = Console.ReadLine();
+
+                        // Check if the input can be parsed as an integer
+                        if (int.TryParse(input, out numberOfCopies))
+                        {
+                            validInt = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid integer.");
+                        }
+                    // Update the book's number of copies
+                    book.NumberOfCopies = numberOfCopies;
+                    }
                 }
                 catch(Exception e){
                     Console.WriteLine(e.Message);
                 }
+                // Write the updated books list back to the CSV file
+                WriteToCSV();
                 break;
 
             case 2:
