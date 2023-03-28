@@ -118,7 +118,7 @@ public class Program
         }
     }
 
-// TODO allow user to remove book by ISBN or title
+
     private static void RemoveBook()
     {
         // Prompt the user to enter the book's ISBN or title to remove
@@ -134,8 +134,8 @@ public class Program
 
     private static void UpdateBook()
     {
-        // Prompt the user to enter the ISBN of the book to update
-        Console.Write("Enter the ISBN of your book: ");
+        // Prompt the user to enter the ISBN or Title of the book to update
+        Console.Write("Enter the ISBN or Title of your book: ");
         string identifier = Console.ReadLine();
 
         // Call the UpdateBookDetails method from the inventory object with the given identifier
@@ -348,15 +348,6 @@ public class BookInventory
         WriteToCSV();
     }
 
-
-
-
-
-
-
-
-
-
     public void RemoveBook(string identifier)
     {
         // Read the books from the CSV file and store them in the books list
@@ -374,8 +365,8 @@ public class BookInventory
         // Read the books from the CSV file and store them in the books list
         books = ReadFromCSV();
 
-        // Find the book to update using the provided identifier (ISBN)
-        Book book = books.Find(b => b.ISBN == identifier);
+        // Find the book to update using the provided identifier (ISBN) or title
+        Book book = books.Find(b => b.ISBN == identifier || b.Title == identifier);
 
         // If no matching book is found, display a message and return
         if (book == null)
