@@ -298,46 +298,63 @@ public class BookInventory
 
     public void RemoveBook(string identifier)
     {
-        // read the CSV file
+        // Read the books from the CSV file and store them in the books list
         books = ReadFromCSV();
-        // remove any book with the given ISBN or title
-        books.RemoveAll(b => b.ISBN == identifier);
-        WriteToCSV();
 
+        // Remove any book with the given identifier (ISBN) from the books list
+        books.RemoveAll(b => b.ISBN == identifier);
+
+        // Write the updated books list back to the CSV file
+        WriteToCSV();
     }
 
     public void UpdateBookDetails(string identifier)
     {
-        // read the CSV file
+        // Read the books from the CSV file and store them in the books list
         books = ReadFromCSV();
-        // find the book to update
+
+        // Find the book to update using the provided identifier (ISBN)
         Book book = books.Find(b => b.ISBN == identifier);
+
+        // If no matching book is found, display a message and return
         if (book == null)
         {
             Console.WriteLine("Book not found.");
             return;
         }
-        // if book is found, update the book details and write to CSV file
+
+        // If a matching book is found, display the available update options
         Console.WriteLine("1. Enter number of copies ");
         Console.WriteLine("2. Change loan status ");
+
+        // Read the user's choice from the console
         int option = int.Parse(Console.ReadLine());
+
+
         switch (option) {
             case 1:
                 try{
+                // Prompt the user for the new number of copies and update the book
                 Console.Write("Enter number of copies: ");
                 int numberOfCopies = int.Parse(Console.ReadLine());
                 book.NumberOfCopies = numberOfCopies;
+
+                // Write the updated books list back to the CSV file
                 WriteToCSV();
                 }
                 catch(Exception e){
                     Console.WriteLine(e.Message);
                 }
                 break;
+
             case 2:
                 try{
+                // Prompt the user for the new loan status and update the book
                 Console.Write("Is the book Borrowed? True or False: ");
                 bool isBorrowed = bool.Parse(Console.ReadLine());
                 book.IsBorrowed = isBorrowed;
+
+                // Write the updated books list back to the CSV file
                 WriteToCSV();
                 }
                 catch(Exception e){
