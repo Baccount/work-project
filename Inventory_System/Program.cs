@@ -16,7 +16,8 @@ public class Program
     // Define the Main method, which is the entry point of the console application
     public static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to the Book Inventory System!");
+        Console.WriteLine("Welcome to the Book Inventory System");
+        Console.WriteLine();
         // Declare a boolean variable called exit and initialize it to false
         bool exit = false;
 
