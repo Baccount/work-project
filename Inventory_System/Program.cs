@@ -4,7 +4,7 @@ using CsvHelper.Configuration;
 
 // Credit: Brandon Moore :)
 // Install CsvHelper using this command in the terminal:
-// dotnet add package CsvHelper
+// $ dotnet add package CsvHelper
 // https://github.com/JoshClose/CsvHelper
 
 
@@ -463,7 +463,7 @@ public class BookInventory
 
 
 
-// Define a class called BookMap that inherits from ClassMap<Book> provided by CsvHelper
+// Define a class called BookMap that inherits from ClassMap<Book>
 public class BookMap : ClassMap<Book>
 {
     // BookMap constructor for mapping Book properties to CSV columns
