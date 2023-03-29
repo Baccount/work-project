@@ -23,7 +23,7 @@ public class Program
         while (!exit)
         {
             // Display the menu options to the user
-            Console.WriteLine("Book Inventory Management");
+            Console.WriteLine("Book Inventory System");
             Console.WriteLine("1. Add new book");
             Console.WriteLine("2. Remove book");
             Console.WriteLine("3. Update book");
