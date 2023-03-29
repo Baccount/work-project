@@ -16,11 +16,13 @@ public class Program
     // Define the Main method, which is the entry point of the console application
     public static void Main(string[] args)
     {
+        // Declare a boolean variable called exit and initialize it to false
         bool exit = false;
 
         // Use a while loop to keep the menu running until the user decides to exit
         while (!exit)
         {
+            // Display the menu options to the user
             Console.WriteLine("Book Inventory System");
             Console.WriteLine("1. Add new book");
             Console.WriteLine("2. Remove book");
@@ -35,6 +37,7 @@ public class Program
 
             if (!int.TryParse(input, out choice))
             {
+                // Parsing failed
                 // Handle the error or prompt the user to enter a valid input
                 Console.WriteLine("Invalid choice. Please try again.");
                 Main(args);
@@ -152,7 +155,10 @@ private static void SearchBook()
         // Check if the search term is empty or the option is 0
         if (searchTerm == "" || option == 0)
         {
+            // Inform the user that the search term or option is invalid
             Console.WriteLine("Invalid search term or invalid option.");
+
+            // Print an empty line for better output readability
             Console.WriteLine();
 
             // Call the SearchBook function to prompt the user for a new search term and option
@@ -392,6 +398,7 @@ public class BookInventory
                 {
                     try
                     {
+                        // Prompt the user for the new loan status
                         Console.Write("Is the book Borrowed? True or False: ");
                         string input = Console.ReadLine() ?? "";
 
