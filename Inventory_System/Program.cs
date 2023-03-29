@@ -5,6 +5,7 @@ using CsvHelper.Configuration;
 // Credit: Brandon Moore :)
 // Install CsvHelper using this command in the terminal:
 // dotnet add package CsvHelper
+// https://github.com/JoshClose/CsvHelper
 
 
 public class Program
