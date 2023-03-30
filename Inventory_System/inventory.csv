@@ -1,0 +1,14 @@
+Title,Author,ISBN,PublicationDate,NumberOfCopies,IsBorrowed
+To Kill a Mockingbird,Harper Lee,9780060935467,07/11/1960 00:00:00,5,True
+1984,George Orwell,9780451524935,06/08/1949 00:00:00,29,True
+The Great Gatsby,F. Scott Fitzgerald,9780743273565,10/10/2004 00:00:00,3,True
+The Catcher in the Rye,J. D. Salinger,9780316769488,01/01/1951 00:00:00,8,True
+The Lord of the Rings,J. R. R. Tolkien,9780544003415,07/29/2012 00:00:00,2,True
+The Kite Runner,Khaled Hosseini,9781594631930,03/04/2003 00:00:00,1,True
+The Da Vinci Code,Dan Brown,9780307474278,03/18/2003 00:00:00,9,True
+The Alchemist,Paulo Coelho,9780061122415,10/01/1993 00:00:00,7,False
+The Book Thief,Markus Zusak,9780375831003,08/14/2007 00:00:00,4,True
+The Giver,Lois Lowry,9780547345666,09/01/2012 00:00:00,10,True
+The Hunger Games,Suzanne Collins,9780439023481,09/14/2008 00:00:00,2,True
+The Fault in Our Stars,John Green,9780525478817,01/10/2012 00:00:00,9,False
+The Hitchhiker's Guide to the Galaxy,Douglas Adams,9780345391803,10/12/1979 00:00:00,6,False
