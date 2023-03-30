@@ -301,7 +301,7 @@ public class BookInventory
         books = ReadFromCSV();
 
         // Use the LINQ FirstOrDefault method to find the first occurrence of a book with the same ISBN
-        Book existingBook = books.FirstOrDefault(b => b.ISBN == book.ISBN);
+        Book? existingBook = books.FirstOrDefault(b => b.ISBN == book.ISBN);
 
         if (existingBook != null)
         {
@@ -336,7 +336,7 @@ public class BookInventory
         books = ReadFromCSV();
 
         // Find the book to update using the provided identifier (ISBN) or title
-        Book book = books.Find(b => b.ISBN == identifier || b.Title == identifier);
+        Book? book = books.Find(b => b.ISBN == identifier || b.Title == identifier);
 
         // If no matching book is found, display a message and return
         if (book == null)
@@ -449,8 +449,8 @@ public class BookInventory
         author = author?.ToLower();
 
         // Use the LINQ FirstOrDefault method to find the first occurrence of a book with the same ISBN, title or author
-        Book book = books.FirstOrDefault(b => (title == null || b.Title.ToLower() == title) &&
-                                        (author == null || b.Author.ToLower() == author) &&
+        Book? book = books.FirstOrDefault(b => (title == null || b.Title?.ToLower() == title) &&
+                                        (author == null || b.Author?.ToLower() == author) &&
                                         (isbn == null || b.ISBN == isbn));
 
         // If no matching book is found, return null
