@@ -109,7 +109,8 @@ public class Program
             Console.WriteLine("Book added successfully.");
             Console.WriteLine();
         }
-        catch(Exception e){
+        catch (Exception e)
+        {
             Console.WriteLine(e.Message);
             AddNewBook();
         }
@@ -138,7 +139,7 @@ public class Program
         // Call the UpdateBookDetails method from the inventory object with the given identifier
         inventory.UpdateBookDetails(identifier);
     }
-private static void SearchBook()
+    private static void SearchBook()
     {
         // Display search options to the user
         Console.WriteLine("Search by");
@@ -362,9 +363,11 @@ public class BookInventory
         }
 
 
-        switch (option) {
+        switch (option)
+        {
             case 1:
-                try{
+                try
+                {
                     int numberOfCopies;
                     bool validInt = false;
 
@@ -382,11 +385,12 @@ public class BookInventory
                         {
                             Console.WriteLine("Invalid input. Please enter a valid integer.");
                         }
-                    // Update the book's number of copies
-                    book.NumberOfCopies = numberOfCopies;
+                        // Update the book's number of copies
+                        book.NumberOfCopies = numberOfCopies;
                     }
                 }
-                catch(Exception e){
+                catch (Exception e)
+                {
                     Console.WriteLine(e.Message);
                 }
                 // Write the updated books list back to the CSV file
