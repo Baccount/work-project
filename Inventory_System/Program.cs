@@ -451,8 +451,8 @@ public class BookInventory
         author = author?.ToLower();
 
         // Use the LINQ FirstOrDefault method to find the first occurrence of a book with the same ISBN, title or author
-        Book book = books.FirstOrDefault(b => (title == null || b.Title == title) &&
-                                        (author == null || b.Author == author) &&
+        Book book = books.FirstOrDefault(b => (title == null || b.Title.ToLower() == title) &&
+                                        (author == null || b.Author.ToLower() == author) &&
                                         (isbn == null || b.ISBN == isbn));
 
         // If no matching book is found, return null
