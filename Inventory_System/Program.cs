@@ -239,25 +239,52 @@ public class BookInventory
     }
 
 
-
-
     private List<Book> ReadFromCSV()
     {
+        List<Book> records = new List<Book>();
+
         try
         {
             // Create a StreamReader instance to read from the inventoryFilePath
             using (var reader = new StreamReader(inventoryFilePath))
-            // Create a CsvReader instance with CultureInfo.InvariantCulture
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                // Register the BookMap class to configure the mapping between the Book class and the CSV columns
-                csv.Context.RegisterClassMap<BookMap>();
+                // Create a CsvConfiguration instance with CultureInfo.InvariantCulture
+                var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    // Ignore missing fields
+                    MissingFieldFound = null
+                };
 
-                // Read the records from the CSV file and convert them to a list of Book objects
-                var records = csv.GetRecords<Book>().ToList();
+                // Create a CsvReader instance with the CsvConfiguration instance
+                using (var csv = new CsvReader(reader, configuration))
+                {
+                    // Register the BookMap class to configure the mapping between the Book class and the CSV columns
+                    csv.Context.RegisterClassMap<BookMap>();
 
-                // Return the list of Book objects
-                return records;
+                    // Read the records from the CSV file one by one
+                    while (csv.Read())
+                    {
+                        try
+                        {
+                            // Read a single record and convert it to a Book object
+                            var record = csv.GetRecord<Book>();
+
+                            // Check if the record is not null and add it to the list of records
+                            if (record != null)
+                            {
+                                records.Add(record);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Null record encountered at line {csv.Context.Parser.Row}");
+                            }
+                        }
+                        catch (CsvHelperException ex)
+                        {
+                            Console.WriteLine($"Error reading record from CSV file at line {csv.Context.Parser.Row}: {ex.Message}");
+                        }
+                    }
+                }
             }
         }
         catch (Exception ex)
@@ -267,7 +294,13 @@ public class BookInventory
             // Return an empty list of Book objects in case of an error
             return new List<Book>();
         }
+
+        // Return the list of Book objects
+        return records;
     }
+
+
+
 
     private void WriteToCSV()
     {
